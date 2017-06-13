@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.example.android.booklistingapp.MainActivity">
+
+    <TextView
+        style="@style/SearchInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/search_instructions_1" />
+
+    <EditText
+        style="@style/SearchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:hint="@string/search_hint"
+        android:inputType="text" />
+
+    <TextView
+        style="@style/SearchInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
+        android:text="@string/search_instructions_2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/and"
+                android:textSize="@dimen/search_criteria_font_size" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/or"
+                android:textSize="@dimen/search_criteria_font_size" />
+
+        </RadioGroup>
+
+        <EditText
+            style="@style/SearchBar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/horizontal_spacing"
+            android:layout_marginStart="@dimen/horizontal_spacing"
+            android:hint="@string/search_hint"
+            android:inputType="text" />
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/SearchInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
+        android:text="@string/search_instructions_2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/vertical_spacing_between_content_areas"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/and"
+                android:textSize="@dimen/search_criteria_font_size" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/or"
+                android:textSize="@dimen/search_criteria_font_size" />
+
+        </RadioGroup>
+
+        <EditText
+            style="@style/SearchBar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/horizontal_spacing"
+            android:layout_marginStart="@dimen/horizontal_spacing"
+            android:hint="@string/search_hint"
+            android:inputType="text" />
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/QueryCheck"
+        android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
+        android:layout_marginBottom="@dimen/vertical_spacing_between_content_areas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/query_check"/>
+
+    <FrameLayout
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/button_touch_target_height"
+        android:layout_marginTop="@dimen/vertical_spacing_between_content_areas">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/button_touch_target_horizontal_padding"
+            android:layout_marginLeft="@dimen/button_touch_target_horizontal_padding"
+            android:layout_marginRight="@dimen/button_touch_target_horizontal_padding"
+            android:layout_marginStart="@dimen/button_touch_target_horizontal_padding"
+            android:background="@drawable/button">
+
+            <ImageView
+                android:id="@+id/search_icon"
+                android:layout_width="@dimen/icon_height"
+                android:layout_height="@dimen/icon_height"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/search_button_icon_padding"
+                android:contentDescription="@string/icon_content_descr"
+                android:src="@drawable/ic_search_24dp" />
+
+            <TextView
+                style="@style/SearchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/search_icon"
+                android:layout_toRightOf="@id/search_icon"
+                android:layout_marginRight="@dimen/search_button_text_padding"
+                android:layout_marginEnd="@dimen/search_button_text_padding"
+                android:text="@string/search" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
+
+

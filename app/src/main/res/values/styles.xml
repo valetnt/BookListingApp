@@ -1,0 +1,65 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="SearchBar" parent="AppTheme">
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">@dimen/search_bar_font_size</item>
+    </style>
+
+    <style name="QueryCheck" parent="AppTheme">
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">@dimen/search_button_font_size</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="SearchButton" parent="AppTheme">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/search_button_font_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:background">@drawable/button</item>
+    </style>
+
+    <style name="SearchInstructions" parent="AppTheme">
+        <item name="android:textColor">@color/colorTextDarker</item>
+        <item name="android:textSize">@dimen/search_instructions_font_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="EmptyListMessage" parent="AppTheme">
+        <item name="android:textColor">@color/colorTextDarker</item>
+        <item name="android:textSize">@dimen/emptylist_message_font_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="EmptyListSearchHint" parent="AppTheme">
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">@dimen/emptylist_new_search_hint_font_size</item>
+    </style>
+
+    <style name="ListItemContents" parent="AppTheme">
+        <item name="android:textSize">@dimen/list_item_contents_font_size</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="ListItemAuthors" parent="ListItemContents">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/list_item_contents_authors_font_size</item>
+        <item name="android:textColor">@color/colorTextDarker</item>
+    </style>
+
+    <style name="ListItemTitle" parent="ListItemContents">
+        <item name="android:textSize">@dimen/list_item_contents_title_font_size</item>
+        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+</resources>
