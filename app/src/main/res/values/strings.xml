@@ -14,8 +14,9 @@
     <string name="authors">Authors, divided by commas</string>
     <string name="publishing_info">Wiley &amp; Sons, 2002</string>
     <string name="num_ratings">(132)</string>
-    <string name="no_internet_connection">No Internet connection.</string>
+    <string name="no_internet_connection">You are offline.</string>
     <string name="no_results_found">No results correspond to your search.</string>
-    <string name="hint_for_new_search">You may want to reduce the number of keywords.</string>
+    <string name="no_internet_connection_hint">Please check your network connection.</string>
+    <string name="no_results_found_hint">You may want to reduce the number of keywords.</string>
     <string name="new_search">New search</string>
 </resources>

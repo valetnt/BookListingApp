@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -7,9 +9,11 @@
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:layout_marginStart="@dimen/activity_horizontal_margin"
-    android:layout_marginTop="@dimen/activity_vertical_margin">
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.android.booklistingapp.SearchResultsActivity">
 
     <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
@@ -22,10 +26,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/emptylist_big_margin"
-        android:paddingLeft="@dimen/search_button_text_padding"
-        android:paddingStart="@dimen/search_button_text_padding"
-        android:paddingRight="@dimen/search_button_text_padding"
         android:paddingEnd="@dimen/search_button_text_padding"
+        android:paddingLeft="@dimen/search_button_text_padding"
+        android:paddingRight="@dimen/search_button_text_padding"
+        android:paddingStart="@dimen/search_button_text_padding"
         android:text="@string/new_search" />
 
     <ListView
@@ -38,6 +42,7 @@
 
     <!-- Layout of the EmptyView -->
     <LinearLayout
+        android:id="@+id/empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -46,14 +51,14 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/EmptyListImage"
+            android:id="@+id/empty_list_image"
             android:layout_width="@dimen/emptylist_image_size"
             android:layout_height="@dimen/emptylist_image_size"
             android:contentDescription="@string/img_book_content_descr"
             android:src="@drawable/book" />
 
         <TextView
-            android:id="@+id/EmptyListMessage"
+            android:id="@+id/empty_list_message"
             style="@style/EmptyListMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,13 +67,13 @@
             android:text="@string/no_results_found" />
 
         <TextView
-            android:id="@+id/EmptyListSearchHint"
+            android:id="@+id/empty_list_search_hint"
             style="@style/EmptyListSearchHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
             android:gravity="center"
-            android:text="@string/hint_for_new_search" />
+            android:text="@string/no_results_found_hint" />
 
     </LinearLayout>
 
