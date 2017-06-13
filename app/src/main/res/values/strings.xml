@@ -17,6 +17,7 @@
     <string name="no_internet_connection">You are offline.</string>
     <string name="no_results_found">No results correspond to your search.</string>
     <string name="no_internet_connection_hint">Please check your network connection.</string>
-    <string name="no_results_found_hint">You may want to reduce the number of keywords.</string>
+    <string name="no_results_found_hint">You may want to choose different keywords or relax the
+        constraints (e.g. switch the query logic from AND to OR).</string>
     <string name="new_search">New search</string>
 </resources>

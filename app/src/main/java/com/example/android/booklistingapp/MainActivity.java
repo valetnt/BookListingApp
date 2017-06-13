@@ -24,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
+                 *
+                 * TODO: If the user has entered no keyword, make a Toast message!!!
+                 *
+                 */
                 Intent querySearch = new Intent(MainActivity.this, SearchResultsActivity.class);
                 startActivity(querySearch);
             }
