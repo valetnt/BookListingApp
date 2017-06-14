@@ -7,11 +7,11 @@ import java.util.List;
 
 public class BookListLoader extends AsyncTaskLoader<List<Book>> {
 
-    private String mQuery;
+    private String mQueryURL;
 
-    public BookListLoader(Context context, String query) {
+    public BookListLoader(Context context, String queryURL) {
         super(context);
-        mQuery = query;
+        mQueryURL = queryURL;
     }
 
     @Override
@@ -23,9 +23,9 @@ public class BookListLoader extends AsyncTaskLoader<List<Book>> {
     public List<Book> loadInBackground() {
 
         // If query string is null, return early
-        if(mQuery == null) {
+        if (mQueryURL == null) {
             return null;
         }
-        return QueryUtils.fetchBooksList(mQuery);
+        return QueryUtils.fetchBooksList(mQueryURL);
     }
 }

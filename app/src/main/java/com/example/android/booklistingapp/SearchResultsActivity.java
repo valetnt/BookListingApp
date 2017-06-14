@@ -20,6 +20,7 @@ public class SearchResultsActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<Book>> {
 
     private static final String LOG_TAG = SearchResultsActivity.class.getSimpleName();
+    private static final String QUERY = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=1";
 
     private String mQuery;
     private ProgressBar mProgressBar;
@@ -34,8 +35,6 @@ public class SearchResultsActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
-
-        mQuery = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=100";
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
         mEmptyView = (ViewGroup) findViewById(R.id.empty_view);
@@ -87,7 +86,7 @@ public class SearchResultsActivity extends AppCompatActivity
     @Override
     public Loader<List<Book>> onCreateLoader(int id, Bundle args) {
         // Return a new instance of the loader BookListLoader
-        return new BookListLoader(this, mQuery);
+        return new BookListLoader(this, QUERY);
     }
 
     @Override
