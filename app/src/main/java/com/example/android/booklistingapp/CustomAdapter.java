@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,17 +34,23 @@ public class CustomAdapter extends ArrayAdapter<Book> {
             rootView = LayoutInflater.from(mContext).inflate(R.layout.list_item, parent, false);
         }
 
-        TextView mainAuthor = (TextView) rootView.findViewById(R.id.authors);
+        TextView author = (TextView) rootView.findViewById(R.id.authors);
         TextView title = (TextView) rootView.findViewById(R.id.title);
-        TextView publisher = (TextView) rootView.findViewById(R.id.publishing_info);
+        TextView publishingInfo = (TextView) rootView.findViewById(R.id.publishing_info);
         TextView num_ratings = (TextView) rootView.findViewById(R.id.num_ratings);
+        RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.stars);
 
         Book currentItem = getItem(position);
 
-        mainAuthor.setText(currentItem.getMainAuthor());
+        author.setText(currentItem.getAuthor());
         title.setText(currentItem.getTitle());
-        publisher.setText(currentItem.getPublisher());
-        num_ratings.setText("(" + currentItem.getNum_Ratings() + ")");
+        publishingInfo.setText(currentItem.getPublisher() + ", " + currentItem.getPublishingDate());
+        if (currentItem.getNum_Ratings() > 0) {
+            num_ratings.setText("(" + currentItem.getNum_Ratings() + ")");
+            ratingBar.setRating((float) currentItem.getRating());
+        } else {
+            num_ratings.setText("");
+        }
 
         return rootView;
     }

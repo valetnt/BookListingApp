@@ -12,7 +12,7 @@
     <string name="search">search</string>
     <string name="title">\"Title of the volume\"</string>
     <string name="authors">Authors, divided by commas</string>
-    <string name="publishing_info">Wiley &amp; Sons, 2002, Third Ed.</string>
+    <string name="publishing_info">Wiley &amp; Sons, 2002</string>
     <string name="num_ratings">(132)</string>
     <string name="no_internet_connection">You are offline.</string>
     <string name="no_results_found">No results correspond to your search.</string>

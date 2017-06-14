@@ -6,29 +6,27 @@ import android.support.annotation.Nullable;
 public class Book {
 
     private String mTitle;
-    private String mMainAuthor;
+    private String mAuthor;
     private String mPublisher;
-    private String mDateOfPublishing;
-    private int mEdition;
-    private String mAuthor1 = null;
-    private String mAuthor2 = null;
-    private int mRating = -1;
+    private String mPublishingDate;
+    private String mLink;
+    private double mRating = -1;
     private int mNum_Ratings = -1;
 
     /*
      * Declare a public constructor that takes title, mainAuthor, publisher, dateOfPublishing
      * and edition_number as arguments
      */
-    public Book(@NonNull String title, @NonNull String mainAuthor, @NonNull String publisher,
-                @Nullable String dateOfPublishing, int edition_number) {
+    public Book(@NonNull String title, @NonNull String author, @NonNull String publisher,
+                @Nullable String publishingDate, @Nullable String link) {
         mTitle = title;
-        mMainAuthor = mainAuthor;
+        mAuthor = author;
         mPublisher = publisher;
-        mDateOfPublishing = dateOfPublishing;
-        mEdition = edition_number;
+        mPublishingDate = publishingDate;
+        mLink = link;
     }
 
-    public void setRating(int rating, int num_ratings) {
+    public void setRating(double rating, int num_ratings) {
         mRating = rating;
         mNum_Ratings = num_ratings;
     }
@@ -37,23 +35,23 @@ public class Book {
         return mTitle;
     }
 
-    public String getMainAuthor() {
-        return mMainAuthor;
+    public String getAuthor() {
+        return mAuthor;
     }
 
     public String getPublisher() {
         return mPublisher;
     }
 
-    public String getDateOfPublishing() {
-        return mDateOfPublishing;
+    public String getPublishingDate() {
+        return mPublishingDate;
     }
 
-    public int getEdition() {
-        return mEdition;
+    public String getLink() {
+        return mLink;
     }
 
-    public int getRating() {
+    public double getRating() {
         return mRating;
     } // Returns -1 if rating is not assigned
 
