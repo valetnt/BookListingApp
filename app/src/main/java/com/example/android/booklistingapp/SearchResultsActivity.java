@@ -65,12 +65,15 @@ public class SearchResultsActivity extends AppCompatActivity
         boolean isConnected = (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
 
         if (isConnected) {
-            // Get a LoaderManager to handle an AsyncTask
+            // If the device is connected to the network, we can perform an http request.
+            // Get a LoaderManager to handle an AsyncTask on a background thread, in order to manage
+            // the http request and properly receive the results to our API query.
             LoaderManager loaderManager = getLoaderManager();
-            // Launch the LoaderManager
+            // Launch the LoaderManager with an arbitrary index (we only use one loader)
             loaderManager.initLoader(0, null, this);
 
         } else {
+            //
             mProgressBar.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
             mEmptyStateMessage.setText(getString(R.string.no_internet_connection));
@@ -93,6 +96,8 @@ public class SearchResultsActivity extends AppCompatActivity
 
         mProgressBar.setVisibility(View.GONE);
 
+        // If query url was malformed, or if http request did not succeed or if query did not
+        // produce any results, show an empty page with a message saying that no result was found.
         if (data == null || data.isEmpty()) {
             mEmptyView.setVisibility(View.VISIBLE);
             mEmptyStateMessage.setText(getString(R.string.no_results_found));

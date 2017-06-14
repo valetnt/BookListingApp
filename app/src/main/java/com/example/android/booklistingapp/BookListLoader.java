@@ -26,11 +26,14 @@ public class BookListLoader extends AsyncTaskLoader<List<Book>> {
     @Override
     public List<Book> loadInBackground() {
 
-        // Create an empty ArrayList of books
-        ArrayList<Book> books = new ArrayList<Book>();
+        // If query string is null, return early
+        if(mQuery == null) {
+            return null;
+        }
 
+        // Create an ArrayList of books and fill it with the results of the query
+        ArrayList<Book> books = QueryUtils.fetchBooksList(mQuery);
         return books;
     }
-
 
 }
