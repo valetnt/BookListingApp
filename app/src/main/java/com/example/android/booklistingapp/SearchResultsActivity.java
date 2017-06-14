@@ -72,7 +72,6 @@ public class SearchResultsActivity extends AppCompatActivity
             loaderManager.initLoader(0, null, this);
 
         } else {
-            //
             mProgressBar.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
             mEmptyStateMessage.setText(getString(R.string.no_internet_connection));
@@ -94,6 +93,9 @@ public class SearchResultsActivity extends AppCompatActivity
         // As soon as the loader has finished loading results, hide the progress bar
         mProgressBar.setVisibility(View.GONE);
 
+        // Clear the adapter of previous books data
+        mAdapter.clear();
+
         // If query url was malformed, or if http request did not succeed, or if query did not
         // produce any results, show an empty page with a message saying that no result was found.
         if (data == null || data.isEmpty()) {
@@ -111,7 +113,6 @@ public class SearchResultsActivity extends AppCompatActivity
             mAdapter = new CustomAdapter(this, data);
             mListView.setAdapter(mAdapter);
         }
-
     }
 
     @Override

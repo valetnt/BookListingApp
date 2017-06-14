@@ -7,6 +7,7 @@ import java.util.List;
 
 public class BookListLoader extends AsyncTaskLoader<List<Book>> {
 
+    private static final String LOG_TAG = BookListLoader.class.getSimpleName();
     private String mQueryURL;
 
     public BookListLoader(Context context, String queryURL) {
@@ -26,6 +27,7 @@ public class BookListLoader extends AsyncTaskLoader<List<Book>> {
         if (mQueryURL == null) {
             return null;
         }
+        // Perform the HTTP request for books data and process the response.
         return QueryUtils.fetchBooksList(mQueryURL);
     }
 }
