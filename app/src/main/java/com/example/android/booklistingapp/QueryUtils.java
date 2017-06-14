@@ -59,7 +59,7 @@ public class QueryUtils {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
-        // If the JSON string is empty or null, then return early.
+        // If the JSON string is empty, then return early.
         if (TextUtils.isEmpty(JSONResponse)) {
             return null;
         }

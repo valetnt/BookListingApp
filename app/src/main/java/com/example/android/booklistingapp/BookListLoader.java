@@ -1,7 +1,7 @@
 package com.example.android.booklistingapp;
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
 
 import java.util.List;
 
@@ -22,7 +22,6 @@ public class BookListLoader extends AsyncTaskLoader<List<Book>> {
 
     @Override
     public List<Book> loadInBackground() {
-
         // If query string is null, return early
         if (mQueryURL == null) {
             return null;

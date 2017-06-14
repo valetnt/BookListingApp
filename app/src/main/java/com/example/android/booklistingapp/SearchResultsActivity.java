@@ -1,11 +1,11 @@
 package com.example.android.booklistingapp;
 
-import android.app.LoaderManager;
 import android.content.Intent;
-import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +22,6 @@ public class SearchResultsActivity extends AppCompatActivity
     private static final String LOG_TAG = SearchResultsActivity.class.getSimpleName();
     private static final String QUERY = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=1";
 
-    private String mQuery;
     private ProgressBar mProgressBar;
     private ViewGroup mEmptyView;
     private ListView mListView;
@@ -67,7 +66,7 @@ public class SearchResultsActivity extends AppCompatActivity
             // If the device is connected to the network, we can perform an http request.
             // Get a LoaderManager to handle an AsyncTask on a background thread, in order to manage
             // the http request and properly receive the results to our API query.
-            LoaderManager loaderManager = getLoaderManager();
+            LoaderManager loaderManager = getSupportLoaderManager();
             // Launch the LoaderManager with an arbitrary index (we only use one loader)
             loaderManager.initLoader(0, null, this);
 
