@@ -5,9 +5,8 @@ import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,6 +25,7 @@ public class SearchResultsActivity extends AppCompatActivity
     private ProgressBar mProgressBar;
     private ViewGroup mEmptyView;
     private ListView mListView;
+    private CustomAdapter mAdapter;
     private TextView mEmptyStateMessage;
     private TextView mEmptyStateHint;
     private Button mNewSearchButton;
@@ -92,23 +92,32 @@ public class SearchResultsActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<List<Book>> loader, List<Book> data) {
-        // Update the UI according to the data returned by BookListLoader
-
+        // As soon as the loader has finished loading results, hide the progress bar
         mProgressBar.setVisibility(View.GONE);
 
-        // If query url was malformed, or if http request did not succeed or if query did not
+        // If query url was malformed, or if http request did not succeed, or if query did not
         // produce any results, show an empty page with a message saying that no result was found.
         if (data == null || data.isEmpty()) {
             mEmptyView.setVisibility(View.VISIBLE);
             mEmptyStateMessage.setText(getString(R.string.no_results_found));
+            // Show a hint on how to improve query
             mEmptyStateHint.setText(getString(R.string.no_results_found_hint));
+            // Give the user the chance to try again with a new search
             mNewSearchButton.setVisibility(View.VISIBLE);
+
+        } else {
+            mListView.setVisibility(View.VISIBLE);
+            mNewSearchButton.setVisibility(View.VISIBLE);
+            // Update the UI according to the data returned by BookListLoader
+            mAdapter = new CustomAdapter(this, data);
+            mListView.setAdapter(mAdapter);
         }
 
     }
 
     @Override
     public void onLoaderReset(Loader<List<Book>> loader) {
-        // When the loader is no longer needed, discard data
+        // When the loader is no longer needed, clear data
+        mAdapter.clear();
     }
 }

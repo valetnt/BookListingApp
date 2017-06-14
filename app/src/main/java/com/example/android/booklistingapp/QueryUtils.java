@@ -32,8 +32,7 @@ public class QueryUtils {
     }
 
     /**
-     * Return a list of {@link Book} objects that has been built up from
-     * parsing a JSON response.
+     * Return a list of {@link Book} objects that has been built up from parsing a JSON response.
      */
     public static ArrayList<Book> fetchBooksList(String query) {
 
@@ -46,7 +45,6 @@ public class QueryUtils {
         if (queryURL == null) {
             // If URL is malformed, do not even perform the http request, but simply return null
             return null;
-
         } else {
             // Perform HTTP request to the URL and receive a JSON response back
             String JSONResponse = makeHttpRequest(queryURL);
@@ -54,13 +52,11 @@ public class QueryUtils {
             // If IOException occurred while performing the HTTP request, return null
             if (JSONResponse == null) {
                 return null;
-
             } else {
                 // Parse the JSON response and fill the ArrayList
 
             }
         }
-
         return books;
     }
 
@@ -96,16 +92,13 @@ public class QueryUtils {
             if (urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
                 JSONResponse = readFromStream(inputStream);
-
             } else {
-                // If the request was not successful, print the error code
+                // If the request was not successful, print the error code in the logcat
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
-
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
         }
-
         return JSONResponse;
     }
 

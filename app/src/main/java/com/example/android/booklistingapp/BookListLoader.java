@@ -1,15 +1,11 @@
 package com.example.android.booklistingapp;
 
-import android.content.Context;
 import android.content.AsyncTaskLoader;
-import android.util.Log;
+import android.content.Context;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookListLoader extends AsyncTaskLoader<List<Book>> {
-
-    private static final String LOG_TAG = BookListLoader.class.getSimpleName();
 
     private String mQuery;
 
@@ -30,10 +26,6 @@ public class BookListLoader extends AsyncTaskLoader<List<Book>> {
         if(mQuery == null) {
             return null;
         }
-
-        // Create an ArrayList of books and fill it with the results of the query
-        ArrayList<Book> books = QueryUtils.fetchBooksList(mQuery);
-        return books;
+        return QueryUtils.fetchBooksList(mQuery);
     }
-
 }
