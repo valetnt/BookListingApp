@@ -1,10 +1,8 @@
 package com.example.android.booklistingapp;
 
-import android.graphics.Typeface;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
-import android.text.style.StyleSpan;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -108,8 +106,7 @@ public class QueryUtils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the JSON results.", e);
-
+            Log.e(LOG_TAG, "Problem retrieving the JSON results", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -163,44 +160,91 @@ public class QueryUtils {
             JSONArray items = JSONString.getJSONArray("items");
             for (int i = 0; i < items.length(); i++) {
                 JSONObject volume = items.getJSONObject(i);
-                String link = volume.getString("selfLink");
+
                 JSONObject volumeInfo = volume.getJSONObject("volumeInfo");
+                // Get title
                 String title = volumeInfo.getString("title");
-                String subtitle = volumeInfo.getString("subtitle");
-                // Concatenate title and subtitle
-                if (title.endsWith(".")) {
-                    title = title + subtitle;
-                } else {
-                    title = title + "." + subtitle;
+                if (volumeInfo.has("subtitle")) {
+                    String subtitle = volumeInfo.getString("subtitle");
+                    // Concatenate title and subtitle
+                    if (title.endsWith(".")) {
+                        title = title + " " + subtitle;
+                    } else if (title.endsWith(". ")) {
+                        title = title + subtitle;
+                    } else {
+                        title = title + ". " + subtitle;
+                    }
                 }
-                JSONArray authors = volumeInfo.getJSONArray("authors");
+                // Get author(s)
                 String author = "Unknown Author";
-                if (authors.length() > 0) {
-                    author = authors.get(0).toString();
-                    String firstAuthor = author;
-                    if (authors.length() > 1) {
-                        String secondAuthor = authors.get(1).toString();
-                        author = firstAuthor + ", " + secondAuthor;
-                        if (authors.length() > 2) {
-                            SpannableStringBuilder spannable =
-                                    new SpannableStringBuilder(firstAuthor + "et al.");
-                            spannable.setSpan(new StyleSpan(Typeface.ITALIC),
-                                    firstAuthor.length() + 1, spannable.length(),
-                                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                            author = spannable.toString();
+                if (volumeInfo.has("authors")) {
+                    JSONArray authors = volumeInfo.getJSONArray("authors");
+                    if (authors.length() > 0) {
+                        author = authors.get(0).toString();
+                        String firstAuthor = author;
+                        if (authors.length() > 1) {
+                            String secondAuthor = authors.get(1).toString();
+                            author = firstAuthor + ", " + secondAuthor;
+                            if (authors.length() > 2) {
+                                author = firstAuthor + " et al.";
+                            }
                         }
                     }
                 }
-                String publisher = volumeInfo.getString("publisher");
-                String publishingDate = volumeInfo.getString("publishedDate");
-                publishingDate = publishingDate.substring(1, 4); // Only the year
+                // Get publisher
+                String publisher = "";
+                if (volumeInfo.has("publisher")) {
+                    publisher = volumeInfo.getString("publisher");
+                }
+                // Get publishing date
+                String publishingDate = "";
+                if (volumeInfo.has("publishedDate")) {
+                    publishingDate = volumeInfo.getString("publishedDate");
+                    publishingDate = publishingDate.substring(0, 4); // Only the year
+                }
+                // Get link to book on books.google.com
+                String link = "https://books.google.com/books?vid=ISBN";
+                if (volumeInfo.has("industryIdentifiers")) {
+                    JSONArray isbn = volumeInfo.getJSONArray("industryIdentifiers");
+                    int j = 0;
+                    while (j < isbn.length()) {
+                        if (isbn.getJSONObject(j).getString("type").equals("ISBN_10")) {
+                            link = link + isbn.getJSONObject(j).getString("identifier");
+                            break;
+                        }
+                        j++;
+                    }
+                }
 
                 Book book = new Book(title, author, publisher, publishingDate, link);
 
-                double rating = volumeInfo.getDouble("averageRating");
-                int num_ratings = volumeInfo.getInt("ratingsCount");
-                if (num_ratings > 0) {
-                    book.setRating(rating, num_ratings);
+                if (volumeInfo.has("averageRating") && volumeInfo.has("ratingsCount")) {
+                    double rating = volumeInfo.getDouble("averageRating");
+                    int num_ratings = volumeInfo.getInt("ratingsCount");
+                    if (num_ratings > 0) {
+                        book.setRating(rating, num_ratings);
+                    }
+                }
+
+                // Download thumbnail, if present. We need to make another HTTP request.
+                if (volumeInfo.has("imageLinks")) {
+                    JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                    if (imageLinks.has("smallThumbnail")) {
+                        String thumbUrl = imageLinks.getString("smallThumbnail");
+                        Bitmap thumbnail = null;
+                        // Turn the String into a valid URL
+                        URL url = createUrl(thumbUrl);
+                        // Download image from the specified URL
+                        try {
+                            thumbnail = downloadBitmap(url);
+                        } catch (IOException e) {
+                            Log.e(LOG_TAG, "Could not download the image", e);
+                        }
+                        // If download was successful, assign image as book cover thumbnail
+                        if (thumbnail != null) {
+                            book.setThumbnail(thumbnail);
+                        }
+                    }
                 }
 
                 booklist.add(book);
@@ -213,5 +257,45 @@ public class QueryUtils {
         }
         // Return the list of books
         return booklist;
+    }
+
+    private static Bitmap downloadBitmap(URL url) throws IOException {
+
+        Bitmap bitmap = null;
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+
+        // If the URL is null, then return early.
+        if (url == null) {
+            return null;
+        }
+
+        try {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.connect();
+            // If the request was successful (response code 200), then decode the
+            // input stream into a bitmap using the static method BitmapFactory.decodeStream
+            if (urlConnection.getResponseCode() == 200) {
+                inputStream = urlConnection.getInputStream();
+                if (inputStream != null) {
+                    bitmap = BitmapFactory.decodeStream(inputStream);
+                }
+            } else {
+                // If the request was not successful, print the error code in the logcat
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem retrieving the image", e);
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
+        return bitmap;
     }
 }

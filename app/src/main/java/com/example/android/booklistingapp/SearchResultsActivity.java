@@ -3,12 +3,14 @@ package com.example.android.booklistingapp;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -20,7 +22,8 @@ import java.util.List;
 public class SearchResultsActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<Book>> {
 
-    private static final String QUERY = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=1";
+    private static final String LOG_TAG = SearchResultsActivity.class.getSimpleName();
+    private static final String QUERY = "https://www.googleapis.com/books/v1/volumes?q=androiddeveloper&maxResults=40&langRestrict=en";
 
     private ProgressBar mProgressBar;
     private ViewGroup mEmptyView;
@@ -57,6 +60,18 @@ public class SearchResultsActivity extends AppCompatActivity
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
         mListView.setAdapter(mAdapter);
+
+        // Set an item click listener on the ListView, which sends an intent to a web browser
+        // to visualize the page of the selected book on books.google.com
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Book selectedBook = mAdapter.getItem(position);
+                Intent openWebPage = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(selectedBook.getLink()));
+                startActivity(openWebPage);
+            }
+        });
 
         mProgressBar.setVisibility(View.VISIBLE);
         mEmptyView.setVisibility(View.GONE);

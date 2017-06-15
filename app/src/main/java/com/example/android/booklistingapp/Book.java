@@ -1,7 +1,6 @@
 package com.example.android.booklistingapp;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.graphics.Bitmap;
 
 public class Book {
 
@@ -12,13 +11,14 @@ public class Book {
     private String mLink;
     private double mRating = -1;
     private int mNum_Ratings = -1;
+    private Bitmap mThumbnail;
+    private boolean mHasThumbnail = false;
 
     /*
      * Declare a public constructor that takes title, mainAuthor, publisher, dateOfPublishing
      * and edition_number as arguments
      */
-    public Book(@NonNull String title, @NonNull String author, @NonNull String publisher,
-                @Nullable String publishingDate, @Nullable String link) {
+    public Book(String title, String author, String publisher, String publishingDate, String link) {
         mTitle = title;
         mAuthor = author;
         mPublisher = publisher;
@@ -58,4 +58,17 @@ public class Book {
     public int getNum_Ratings() {
         return mNum_Ratings;
     } // Returns -1 if rating is not assigned
+
+    public boolean hasThumbnail() {
+        return mHasThumbnail;
+    }
+
+    public Bitmap getThumbnail() {
+        return mThumbnail;
+    } // Returns null if no image assigned
+
+    public void setThumbnail(Bitmap bitmap) {
+        mThumbnail = bitmap;
+        mHasThumbnail = true;
+    }
 }
