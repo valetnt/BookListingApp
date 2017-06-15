@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -43,26 +44,118 @@ public class QueryUtils {
     /**
      * Return a list of {@link Book} objects that has been built up from parsing a JSON response.
      */
-    public static ArrayList<Book> fetchBooksList(String query) {
-
-        // Create an empty ArrayList of Book objects to be filled later
-        ArrayList<Book> booklist = new ArrayList<Book>();
+    public static List<Book> fetchBooksData(String requestURL) {
 
         // Turn the String argument into a URL
-        URL queryURL = createUrl(query);
+        URL queryURL = createUrl(requestURL);
 
-        String JSONResponse = null;
         // Perform HTTP request to the URL and receive a JSON response back
+        String JSONResponse = null;
         try {
             JSONResponse = makeHttpRequest(queryURL);
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Error closing input stream", e);
+            Log.e(LOG_TAG, "Problem making the HTTP request", e);
         }
 
-        // If the JSON string is empty, then return early.
+        // Extract relevant fields from the JSON response and create a list of books
+        List<Book> books = extractFeatureFromJSON(JSONResponse);
+
+        // Return the list of books
+        return books;
+    }
+
+    /**
+     * Returns new URL object from the given string URL.
+     */
+    private static URL createUrl(String stringUrl) {
+        URL url = null;
+        try {
+            url = new URL(stringUrl);
+        } catch (MalformedURLException e) {
+            Log.e(LOG_TAG, "Error with creating URL ", e);
+        }
+        return url;
+    }
+
+    /**
+     * Make an HTTP request to the given URL and return a String as the response.
+     */
+    private static String makeHttpRequest(URL url) throws IOException {
+
+        String JSONResponse = "";
+        InputStream inputStream = null;
+        HttpURLConnection urlConnection = null;
+
+        // If the URL is null, then return early.
+        if (url == null) {
+            return JSONResponse;
+        }
+
+        try {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // If the request was successful (response code 200), then read the
+            // input stream and store its whole content into a String.
+            if (urlConnection.getResponseCode() == 200) {
+                inputStream = urlConnection.getInputStream();
+                JSONResponse = readFromStream(inputStream);
+            } else {
+                // If the request was not successful, print the error code in the logcat
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem retrieving the JSON results.", e);
+
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
+        return JSONResponse;
+    }
+
+    /**
+     * Convert the {@link InputStream} into a String which contains the
+     * whole JSON response from the server.
+     */
+    private static String readFromStream(InputStream inputStream) throws IOException {
+        StringBuilder outputString = new StringBuilder();
+        if (inputStream != null) {
+
+            Log.i(LOG_TAG, "INPUT STREAM IS NON-NULL");
+
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream,
+                    Charset.forName("UTF-8"));
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                outputString.append(line);
+                bufferedReader.readLine();
+            }
+        }
+        Log.i(LOG_TAG, "FINISHED READING THE INPUT STREAM");
+        return outputString.toString();
+    }
+
+    /*
+     * Return a list of {@link Book} objects that has been built up from
+     * parsing the given JSON response.
+     */
+    private static List<Book> extractFeatureFromJSON(String JSONResponse) {
+        // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(JSONResponse)) {
             return null;
         }
+
+        // Create an empty ArrayList of Book objects to be filled later
+        ArrayList<Book> booklist = new ArrayList<Book>();
 
         // Try to parse the JSONResponse. If there's a problem with the way the JSON string
         // is formatted, a JSONException exception object will be thrown.
@@ -123,78 +216,7 @@ public class QueryUtils {
             // with the message from the exception.
             Log.e(LOG_TAG, "Problem parsing the JSON results", e);
         }
-
+        // Return the list of books
         return booklist;
-    }
-
-    /**
-     * Returns new URL object from the given string URL.
-     */
-    private static URL createUrl(String stringUrl) {
-        URL url = null;
-        try {
-            url = new URL(stringUrl);
-        } catch (MalformedURLException e) {
-            Log.e(LOG_TAG, "Error with creating URL ", e);
-        }
-        return url;
-    }
-
-    /**
-     * Make an HTTP request to the given URL and return a String as the response.
-     */
-    private static String makeHttpRequest(URL url) throws IOException {
-
-        String JSONResponse = "";
-        InputStream inputStream = null;
-        HttpURLConnection urlConnection = null;
-
-        try {
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(10000 /* milliseconds */);
-            urlConnection.setConnectTimeout(15000 /* milliseconds */);
-            urlConnection.setRequestMethod("GET");
-            urlConnection.connect();
-
-            // If the request was successful (response code 200), then read the
-            // InputStream and store its whole content into a String.
-            if (urlConnection.getResponseCode() == 200) {
-                inputStream = urlConnection.getInputStream();
-                JSONResponse = readFromStream(inputStream);
-            } else {
-                // If the request was not successful, print the error code in the logcat
-                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
-            }
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the JSON results.", e);
-
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
-            if (inputStream != null) {
-                inputStream.close();
-            }
-        }
-        return JSONResponse;
-    }
-
-    /**
-     * Convert the {@link InputStream} into a String which contains the
-     * whole JSON response from the server.
-     */
-    private static String readFromStream(InputStream inputStream) throws IOException {
-        StringBuilder outputString = new StringBuilder();
-        if (inputStream != null) {
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream,
-                    Charset.forName("UTF-8"));
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                outputString.append(line);
-                bufferedReader.readLine();
-            }
-        }
-        return outputString.toString();
     }
 }

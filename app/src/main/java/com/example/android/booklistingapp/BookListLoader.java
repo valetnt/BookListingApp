@@ -27,6 +27,6 @@ public class BookListLoader extends AsyncTaskLoader<List<Book>> {
             return null;
         }
         // Perform the HTTP request for books data and process the response.
-        return QueryUtils.fetchBooksList(mQueryURL);
+        return QueryUtils.fetchBooksData(mQueryURL);
     }
 }

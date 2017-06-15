@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -89,6 +90,9 @@ public class SearchResultsActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<List<Book>> loader, List<Book> data) {
+
+        Log.i(LOG_TAG, "FINISHED LOADING DATA");
+
         // As soon as the loader has finished loading results, hide the progress bar
         mProgressBar.setVisibility(View.GONE);
 
