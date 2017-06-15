@@ -9,7 +9,7 @@ public class Book {
     private String mPublisher;
     private String mPublishingDate;
     private String mLink;
-    private double mRating = -1;
+    private double mRating;
     private int mNum_Ratings = -1;
     private Bitmap mThumbnail;
     private boolean mHasThumbnail = false;
@@ -53,7 +53,7 @@ public class Book {
 
     public double getRating() {
         return mRating;
-    } // Returns -1 if rating is not assigned
+    }
 
     public int getNum_Ratings() {
         return mNum_Ratings;

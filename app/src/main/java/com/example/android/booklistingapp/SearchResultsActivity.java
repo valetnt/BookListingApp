@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,11 +24,12 @@ public class SearchResultsActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<Book>> {
 
     private static final String LOG_TAG = SearchResultsActivity.class.getSimpleName();
-    private static final String QUERY = "https://www.googleapis.com/books/v1/volumes?q=androiddeveloper&maxResults=40&langRestrict=en";
+    private static final String QUERY = "https://www.googleapis.com/books/v1/volumes?q=developer&maxResults=40&langRestrict=en";
 
     private ProgressBar mProgressBar;
     private ViewGroup mEmptyView;
     private ListView mListView;
+    private ImageView mEmptyStateImage;
     private CustomAdapter mAdapter;
     private TextView mEmptyStateMessage;
     private TextView mEmptyStateHint;
@@ -40,6 +42,7 @@ public class SearchResultsActivity extends AppCompatActivity
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
         mEmptyView = (ViewGroup) findViewById(R.id.empty_view);
+        mEmptyStateImage = (ImageView) findViewById(R.id.empty_list_image);
         mEmptyStateHint = (TextView) findViewById(R.id.empty_list_search_hint);
         mEmptyStateMessage = (TextView) findViewById(R.id.empty_list_message);
         mListView = (ListView) findViewById(R.id.list);
@@ -96,6 +99,7 @@ public class SearchResultsActivity extends AppCompatActivity
             mEmptyView.setVisibility(View.VISIBLE);
             mEmptyStateMessage.setText(getString(R.string.no_internet_connection));
             mEmptyStateHint.setText(getString(R.string.no_internet_connection_hint));
+            mEmptyStateImage.setImageResource(R.drawable.no_wifi);
         }
     }
 
@@ -122,6 +126,7 @@ public class SearchResultsActivity extends AppCompatActivity
             // that no result was found.
             mEmptyView.setVisibility(View.VISIBLE);
             mEmptyStateMessage.setText(getString(R.string.no_results_found));
+            mEmptyStateImage.setImageResource(R.drawable.book);
             // Show a hint on how to improve query
             mEmptyStateHint.setText(getString(R.string.no_results_found_hint));
             // Give the user the chance to try again with a new search

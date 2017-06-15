@@ -20,6 +20,7 @@
     <dimen name="search_button_icon_padding">4dp</dimen>
     <dimen name="search_button_text_padding">8dp</dimen>
     <dimen name="search_criteria_font_size">14sp</dimen>
+    <dimen name="search_criteria_additional_padding">4dp</dimen>
 
     <!-- activity_search_results.xml -->
     <dimen name="button_top_margin">32dp</dimen>
@@ -31,5 +32,8 @@
     <dimen name="list_item_contents_font_size">11dp</dimen>
     <dimen name="list_item_contents_authors_font_size">12dp</dimen>
     <dimen name="list_item_contents_title_font_size">14dp</dimen>
+    <dimen name="list_item_no_img_available_txt_font_size">12sp</dimen>
+    <dimen name="list_item_no_img_available_txt_width">64dp</dimen>
+    <dimen name="list_item_thumbnail_padding">6dp</dimen>
 
 </resources>

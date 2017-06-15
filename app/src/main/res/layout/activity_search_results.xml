@@ -26,20 +26,30 @@
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"></ListView>
+            android:layout_weight="1">
 
-        <Button
-            android:id="@+id/new_search_button"
-            style="@style/SearchButton"
+        </ListView>
+
+        <FrameLayout
+            android:id="@+id/search"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/button_height"
+            android:layout_height="@dimen/button_touch_target_height"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/button_top_margin"
-            android:paddingEnd="@dimen/search_button_text_padding"
-            android:paddingLeft="@dimen/search_button_text_padding"
-            android:paddingRight="@dimen/search_button_text_padding"
-            android:paddingStart="@dimen/search_button_text_padding"
-            android:text="@string/new_search" />
+            android:layout_marginTop="@dimen/vertical_spacing_between_content_areas">
+
+            <Button
+                android:id="@+id/new_search_button"
+                style="@style/SearchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/button_top_margin"
+                android:paddingEnd="@dimen/search_button_text_padding"
+                android:paddingLeft="@dimen/search_button_text_padding"
+                android:paddingRight="@dimen/search_button_text_padding"
+                android:paddingStart="@dimen/search_button_text_padding"
+                android:text="@string/new_search" />
+
+        </FrameLayout>
 
     </LinearLayout>
 

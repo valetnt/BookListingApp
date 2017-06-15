@@ -8,4 +8,5 @@
     <color name="colorTitle">#00838F</color>
     <color name="colorStars">#00E5FF</color>
     <color name="colorButton">#006064</color>
+    <color name="colorLightGray">#E0E0E0</color>
 </resources>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,46 +30,99 @@
             android:hint="@string/search_hint"
             android:inputType="text" />
 
-        <TextView
-            style="@style/SearchInstructions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
-            android:text="@string/search_instructions_2" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:background="@drawable/gray_background"
+            android:orientation="vertical"
+            android:padding="@dimen/search_criteria_additional_padding">
 
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/and"
-                    android:textSize="@dimen/search_criteria_font_size" />
-
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/or"
-                    android:textSize="@dimen/search_criteria_font_size" />
-
-            </RadioGroup>
-
-            <EditText
-                style="@style/SearchBar"
-                android:layout_width="0dp"
+            <TextView
+                style="@style/SearchInstructions"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/horizontal_spacing"
-                android:layout_marginStart="@dimen/horizontal_spacing"
-                android:layout_weight="1"
-                android:hint="@string/search_hint"
-                android:inputType="text" />
+                android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
+                android:text="@string/search_instructions_2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/and"
+                        android:textSize="@dimen/search_criteria_font_size" />
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/or"
+                        android:textSize="@dimen/search_criteria_font_size" />
+
+                </RadioGroup>
+
+                <EditText
+                    style="@style/SearchBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/horizontal_spacing"
+                    android:layout_marginStart="@dimen/horizontal_spacing"
+                    android:layout_weight="1"
+                    android:hint="@string/search_hint"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/SearchInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
+                android:text="@string/search_instructions_2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/vertical_spacing_between_content_areas"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/and"
+                        android:textSize="@dimen/search_criteria_font_size" />
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/or"
+                        android:textSize="@dimen/search_criteria_font_size" />
+
+                </RadioGroup>
+
+                <EditText
+                    style="@style/SearchBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/horizontal_spacing"
+                    android:layout_marginStart="@dimen/horizontal_spacing"
+                    android:layout_weight="1"
+                    android:hint="@string/search_hint"
+                    android:inputType="text" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -79,52 +131,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
-            android:text="@string/search_instructions_2" />
+            android:text="@string/order" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/vertical_spacing_between_content_areas"
-            android:orientation="horizontal">
+            android:layout_marginBottom="@dimen/vertical_spacing_between_content_areas">
 
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/and"
-                    android:textSize="@dimen/search_criteria_font_size" />
-
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/or"
-                    android:textSize="@dimen/search_criteria_font_size" />
-
-            </RadioGroup>
-
-            <EditText
-                style="@style/SearchBar"
-                android:layout_width="0dp"
+            <RadioButton
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/horizontal_spacing"
-                android:layout_marginStart="@dimen/horizontal_spacing"
-                android:layout_weight="1"
-                android:hint="@string/search_hint"
-                android:inputType="text" />
+                android:text="@string/relevance"
+                android:textSize="@dimen/search_criteria_font_size" />
 
-        </LinearLayout>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:textSize="@dimen/search_criteria_font_size" />
 
-        <TextView
-            style="@style/QueryCheck"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/vertical_spacing_between_content_areas"
-            android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
-            android:text="@string/query_check" />
+        </RadioGroup>
 
         <FrameLayout
             android:id="@+id/search"

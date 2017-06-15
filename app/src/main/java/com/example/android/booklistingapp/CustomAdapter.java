@@ -45,6 +45,7 @@ public class CustomAdapter extends ArrayAdapter<Book> {
         TextView num_ratings = (TextView) rootView.findViewById(R.id.num_ratings);
         RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.stars);
         ImageView image = (ImageView) rootView.findViewById(R.id.book_cover_image);
+        TextView no_image = (TextView) rootView.findViewById(R.id.no_img_available);
 
         Book currentItem = getItem(position);
 
@@ -64,7 +65,12 @@ public class CustomAdapter extends ArrayAdapter<Book> {
         title.setText(currentItem.getTitle());
 
         // Display publishing info
-        publishingInfo.setText(currentItem.getPublisher() + ", " + currentItem.getPublishingDate());
+        if (currentItem.getPublishingDate().isEmpty()) {
+            publishingInfo.setText(currentItem.getPublisher());
+        } else {
+            publishingInfo.setText(currentItem.getPublisher() + ", "
+                    + currentItem.getPublishingDate());
+        }
 
         // Display rating, if available
         if (currentItem.getNum_Ratings() > 0) {
@@ -72,13 +78,16 @@ public class CustomAdapter extends ArrayAdapter<Book> {
             ratingBar.setRating((float) currentItem.getRating());
         } else {
             num_ratings.setText("");
+            ratingBar.setRating(0);
         }
 
         // Display thumbnail, if available
         if (currentItem.hasThumbnail()) {
             image.setImageBitmap(currentItem.getThumbnail());
+            no_image.setVisibility(View.GONE);
         } else {
             image.setImageResource(R.drawable.book);
+            no_image.setVisibility(View.VISIBLE);
         }
 
         return rootView;
