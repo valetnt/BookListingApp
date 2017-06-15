@@ -20,7 +20,6 @@ import java.util.List;
 public class SearchResultsActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<Book>> {
 
-    private static final String LOG_TAG = SearchResultsActivity.class.getSimpleName();
     private static final String QUERY = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=1";
 
     private ProgressBar mProgressBar;

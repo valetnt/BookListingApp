@@ -193,7 +193,7 @@ public class QueryUtils {
                 }
                 String publisher = volumeInfo.getString("publisher");
                 String publishingDate = volumeInfo.getString("publishedDate");
-                publishingDate = publishingDate.substring(0, 3); // Only the year
+                publishingDate = publishingDate.substring(1, 4); // Only the year
 
                 Book book = new Book(title, author, publisher, publishingDate, link);
 
@@ -205,7 +205,6 @@ public class QueryUtils {
 
                 booklist.add(book);
             }
-
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
