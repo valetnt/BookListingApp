@@ -11,38 +11,51 @@
     android:layout_marginTop="@dimen/activity_vertical_margin"
     tools:context="com.example.android.booklistingapp.SearchResultsActivity">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/list"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
-        </ListView>
+            <ListView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></ListView>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+        </RelativeLayout>
 
         <FrameLayout
-            android:id="@+id/search"
+            android:id="@+id/new_search"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_touch_target_height"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/vertical_spacing_between_content_areas">
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/button_top_margin">
 
-            <Button
-                android:id="@+id/new_search_button"
+            <TextView
                 style="@style/SearchButton"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_height"
-                android:layout_marginTop="@dimen/button_top_margin"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/button_touch_target_horizontal_padding"
+                android:layout_marginLeft="@dimen/button_touch_target_horizontal_padding"
+                android:layout_marginRight="@dimen/button_touch_target_horizontal_padding"
+                android:layout_marginStart="@dimen/button_touch_target_horizontal_padding"
+                android:gravity="center"
                 android:paddingEnd="@dimen/search_button_text_padding"
                 android:paddingLeft="@dimen/search_button_text_padding"
                 android:paddingRight="@dimen/search_button_text_padding"
@@ -58,7 +71,7 @@
         android:id="@+id/empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
         android:orientation="vertical">
 

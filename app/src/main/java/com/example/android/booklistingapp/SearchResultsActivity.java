@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -24,7 +24,7 @@ public class SearchResultsActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<Book>> {
 
     private static final String LOG_TAG = SearchResultsActivity.class.getSimpleName();
-    private static final String QUERY = "https://www.googleapis.com/books/v1/volumes?q=developer&maxResults=40&langRestrict=en";
+    private static final String QUERY = "https://www.googleapis.com/books/v1/volumes?q=hevvvveloper&maxResults=40&langRestrict=en";
 
     private ProgressBar mProgressBar;
     private ViewGroup mEmptyView;
@@ -33,7 +33,7 @@ public class SearchResultsActivity extends AppCompatActivity
     private CustomAdapter mAdapter;
     private TextView mEmptyStateMessage;
     private TextView mEmptyStateHint;
-    private Button mNewSearchButton;
+    private FrameLayout mNewSearchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class SearchResultsActivity extends AppCompatActivity
         mEmptyStateMessage = (TextView) findViewById(R.id.empty_list_message);
         mListView = (ListView) findViewById(R.id.list);
         mListView.setEmptyView(mEmptyView);
-        mNewSearchButton = (Button) findViewById(R.id.new_search_button);
+        mNewSearchButton = (FrameLayout) findViewById(R.id.new_search);
 
         mNewSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +78,6 @@ public class SearchResultsActivity extends AppCompatActivity
 
         mProgressBar.setVisibility(View.VISIBLE);
         mEmptyView.setVisibility(View.GONE);
-        mListView.setVisibility(View.GONE);
         mNewSearchButton.setVisibility(View.GONE);
 
         // Check internet connection
