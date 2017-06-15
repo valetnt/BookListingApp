@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,6 +14,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultsActivity extends AppCompatActivity
@@ -52,6 +52,12 @@ public class SearchResultsActivity extends AppCompatActivity
                 startActivity(goBackToSearchForm);
             }
         });
+
+        // Create a new adapter that takes an empty list of books as input
+        mAdapter = new CustomAdapter(this, new ArrayList<Book>());
+        // Set the adapter on the {@link ListView}
+        // so the list can be populated in the user interface
+        mListView.setAdapter(mAdapter);
 
         mProgressBar.setVisibility(View.VISIBLE);
         mEmptyView.setVisibility(View.GONE);
@@ -91,8 +97,6 @@ public class SearchResultsActivity extends AppCompatActivity
     @Override
     public void onLoadFinished(Loader<List<Book>> loader, List<Book> data) {
 
-        Log.i(LOG_TAG, "FINISHED LOADING DATA");
-
         // As soon as the loader has finished loading results, hide the progress bar
         mProgressBar.setVisibility(View.GONE);
 
@@ -113,8 +117,7 @@ public class SearchResultsActivity extends AppCompatActivity
             mListView.setVisibility(View.VISIBLE);
             mNewSearchButton.setVisibility(View.VISIBLE);
             // Update the UI according to the data returned by BookListLoader
-            mAdapter = new CustomAdapter(this, data);
-            mListView.setAdapter(mAdapter);
+            mAdapter.addAll(data);
         }
     }
 

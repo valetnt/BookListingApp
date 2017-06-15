@@ -128,19 +128,15 @@ public class QueryUtils {
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder outputString = new StringBuilder();
         if (inputStream != null) {
-
-            Log.i(LOG_TAG, "INPUT STREAM IS NON-NULL");
-
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream,
                     Charset.forName("UTF-8"));
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String line = bufferedReader.readLine();
             while (line != null) {
                 outputString.append(line);
-                bufferedReader.readLine();
+                line = bufferedReader.readLine();
             }
         }
-        Log.i(LOG_TAG, "FINISHED READING THE INPUT STREAM");
         return outputString.toString();
     }
 
