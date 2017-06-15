@@ -103,9 +103,9 @@ public class SearchResultsActivity extends AppCompatActivity
         // Clear the adapter of previous books data
         mAdapter.clear();
 
-        // If query url was malformed, or if http request did not succeed, or if query did not
-        // produce any results, show an empty page with a message saying that no result was found.
         if (data == null || data.isEmpty()) {
+            // If query did not produce any results, show an empty page with a message saying
+            // that no result was found.
             mEmptyView.setVisibility(View.VISIBLE);
             mEmptyStateMessage.setText(getString(R.string.no_results_found));
             // Show a hint on how to improve query
@@ -116,7 +116,8 @@ public class SearchResultsActivity extends AppCompatActivity
         } else {
             mListView.setVisibility(View.VISIBLE);
             mNewSearchButton.setVisibility(View.VISIBLE);
-            // Update the UI according to the data returned by BookListLoader
+            // If there is a valid list of books, then add them to the adapter's
+            // data set. This will trigger the ListView to update.
             mAdapter.addAll(data);
         }
     }

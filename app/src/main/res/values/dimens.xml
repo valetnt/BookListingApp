@@ -22,7 +22,7 @@
     <dimen name="search_criteria_font_size">14sp</dimen>
 
     <!-- activity_search_results.xml -->
-    <dimen name="emptylist_big_margin">32dp</dimen>
+    <dimen name="button_top_margin">32dp</dimen>
     <dimen name="emptylist_image_size">96dp</dimen>
     <dimen name="emptylist_message_font_size">16sp</dimen>
     <dimen name="emptylist_new_search_hint_font_size">14sp</dimen>
