@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">Book Listing App</string>
     <string name="img_content_descr">book cover</string>
-    <string name="img_book_content_descr">image of a book, made by Freepik from www.flaticon.com </string>
+    <string name="img_book_content_descr">book icon, made by Freepik from www.flaticon.com </string>
     <string name="icon_content_descr">search icon</string>
-    <string name="search_instructions_1">Search by keyword:</string>
+    <string name="search_instructions_1">Search by keyword(s):</string>
     <string name="search_instructions_2">Search items containing string:</string>
-    <string name="search_hint_keyword"> &#8212;&#8212; type keyword here &#8212;&#8212; </string>
-    <string name="search_hint_string"> &#8212;&#8212; type string here &#8212;&#8212; </string>
+    <string name="search_hint_keyword"> &#8212; Type keyword(s) here &#8212; </string>
+    <string name="search_tip_keyword">One or more keywords separated by spaces</string>
+    <string name="search_hint_string"> &#8212; Type string here &#8212; </string>
+    <string name="search_tip_string">Enclose between quotes for an exact match</string>
     <string name="order">Order results by:</string>
     <string name="relevance">Relevance</string>
     <string name="date">Date of publishing (newest first)</string>
@@ -18,10 +20,10 @@
     <string name="publishing_info">Wiley &amp; Sons, 2002</string>
     <string name="num_ratings">(132)</string>
     <string name="no_internet_connection">You are offline.</string>
-    <string name="no_results_found">No results correspond to your search.</string>
+    <string name="no_results_found">No results match your query.</string>
     <string name="no_internet_connection_hint">Please check your network connection.</string>
-    <string name="no_results_found_hint">You may want to choose different keywords or relax the
-        constraints (e.g. switch the query logic from AND to OR).</string>
+    <string name="no_results_found_hint">Please adjust your query (e.g. check the spelling,
+        remove quotation marks or use less keywords)</string>
     <string name="new_search">New search</string>
     <string name="no_img_available">No image available</string>
 </resources>

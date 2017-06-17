@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -22,13 +22,19 @@
     </style>
 
     <style name="SearchInstructions" parent="AppTheme">
-        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:textColor">@color/colorSearchInstructions</item>
         <item name="android:textSize">@dimen/search_instructions_font_size</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="SearchTip" parent="AppTheme">
+        <item name="android:textColor">@color/colorSearchTip</item>
+        <item name="android:textSize">@dimen/search_tip_font_size</item>
+        <item name="android:textStyle">italic</item>
     </style>
 
     <style name="SearchOptions" parent="AppTheme">
-        <item name="android:textColor">@color/colorTextDarker</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textSize">@dimen/search_options_font_size</item>
     </style>
 
