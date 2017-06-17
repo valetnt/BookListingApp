@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,11 +21,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.android.booklistingapp.MainActivity.QUERY;
+
 public class SearchResultsActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<Book>> {
 
     private static final String LOG_TAG = SearchResultsActivity.class.getSimpleName();
-    private static final String QUERY = "https://www.googleapis.com/books/v1/volumes?q=hevvvveloper&maxResults=40&langRestrict=en";
+    private static final String QUERY_START = "https://www.googleapis.com/books/v1/volumes?q=";
+    private static final String QUERY_END = "&maxResults=40&langRestrict=en";
 
     private ProgressBar mProgressBar;
     private ViewGroup mEmptyView;
@@ -34,11 +38,19 @@ public class SearchResultsActivity extends AppCompatActivity
     private TextView mEmptyStateMessage;
     private TextView mEmptyStateHint;
     private FrameLayout mNewSearchButton;
+    private String mQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+
+        // Receive the intent from MainActivity with the associated query String
+        mQuery = getIntent().getStringExtra(QUERY);
+        // Attach start and end pieces
+        mQuery = QUERY_START + mQuery + QUERY_END;
+
+        Log.i(LOG_TAG, mQuery);
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
         mEmptyView = (ViewGroup) findViewById(R.id.empty_view);
@@ -75,12 +87,28 @@ public class SearchResultsActivity extends AppCompatActivity
                 startActivity(openWebPage);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         mProgressBar.setVisibility(View.VISIBLE);
         mEmptyView.setVisibility(View.GONE);
         mNewSearchButton.setVisibility(View.GONE);
-
-        // Check internet connection
+        /*
+         * CHECK INTERNET CONNECTION:
+         *
+         * Make this check onResume(), rather than onCreate(), since the loader is restarted
+         * every time the activity is resumed.
+         * In this way, if the activity is resumed with internet connection off,
+         * the empty message that the user is going to receive is "you are offline",
+         * rather than "no results found", which is more consistent with what the user expects.
+         *
+         * The price to pay for making this check onResume(), rather than onCreate(),
+         * is that we are going to invoke initLoader every time the activity is resumed.
+         * Therefore we are going to issue more server queries.
+         */
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
@@ -90,10 +118,17 @@ public class SearchResultsActivity extends AppCompatActivity
             // Get a LoaderManager to handle an AsyncTask on a background thread, in order to manage
             // the http request and properly receive the results to our API query.
             LoaderManager loaderManager = getSupportLoaderManager();
-            // Launch the LoaderManager with an arbitrary index (we only use one loader)
+            // Create new loader or resume already existing one
+            // First argument of initLoader() can be an arbitrary index (we only use one loader)
             loaderManager.initLoader(0, null, this);
 
         } else {
+            // If we are offline and a loader already exists, then intercept it before it starts
+            // loading data and kill it. Thus the message displayed will be "you are offline",
+            // rather than "no results found".
+            if (getSupportLoaderManager().getLoader(0) != null) {
+                getSupportLoaderManager().destroyLoader(0);
+            }
             mProgressBar.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
             mEmptyStateMessage.setText(getString(R.string.no_internet_connection));
@@ -108,7 +143,7 @@ public class SearchResultsActivity extends AppCompatActivity
     @Override
     public Loader<List<Book>> onCreateLoader(int id, Bundle args) {
         // Return a new instance of the loader BookListLoader
-        return new BookListLoader(this, QUERY);
+        return new BookListLoader(this, mQuery);
     }
 
     @Override

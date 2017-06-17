@@ -23,109 +23,109 @@
             android:text="@string/search_instructions_1" />
 
         <EditText
+            android:id="@+id/key0"
             style="@style/SearchBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:hint="@string/search_hint"
+            android:hint="@string/search_hint_keyword"
             android:imeOptions="actionDone"
             android:inputType="text" />
+
+        <TextView
+            style="@style/SearchInstructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
+            android:text="@string/search_instructions_2" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/gray_background"
-            android:orientation="vertical"
-            android:padding="@dimen/search_criteria_additional_padding">
+            android:orientation="horizontal">
 
-            <TextView
-                style="@style/SearchInstructions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
-                android:text="@string/search_instructions_2" />
+            <RadioGroup
+                android:id="@+id/radio1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/and"
-                        android:textSize="@dimen/search_criteria_font_size" />
-
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/or"
-                        android:textSize="@dimen/search_criteria_font_size" />
-
-                </RadioGroup>
-
-                <EditText
-                    style="@style/SearchBar"
-                    android:layout_width="0dp"
+                <RadioButton
+                    android:id="@+id/radio1_author"
+                    style="@style/SearchOptions"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/horizontal_spacing"
-                    android:layout_marginStart="@dimen/horizontal_spacing"
-                    android:layout_weight="1"
-                    android:hint="@string/search_hint"
-                    android:imeOptions="actionDone"
-                    android:inputType="text" />
+                    android:text="@string/radio_author" />
 
-            </LinearLayout>
-
-            <TextView
-                style="@style/SearchInstructions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
-                android:text="@string/search_instructions_2" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/vertical_spacing_between_content_areas"
-                android:orientation="horizontal">
-
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/and"
-                        android:textSize="@dimen/search_criteria_font_size" />
-
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/or"
-                        android:textSize="@dimen/search_criteria_font_size" />
-
-                </RadioGroup>
-
-                <EditText
-                    style="@style/SearchBar"
-                    android:layout_width="0dp"
+                <RadioButton
+                    android:id="@+id/radio1_title"
+                    style="@style/SearchOptions"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/horizontal_spacing"
-                    android:layout_marginStart="@dimen/horizontal_spacing"
-                    android:layout_weight="1"
-                    android:hint="@string/search_hint"
-                    android:imeOptions="actionDone"
-                    android:inputType="text" />
+                    android:text="@string/radio_title" />
 
-            </LinearLayout>
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/key1"
+                style="@style/SearchBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/horizontal_spacing"
+                android:layout_marginStart="@dimen/horizontal_spacing"
+                android:layout_weight="1"
+                android:hint="@string/search_hint_string"
+                android:imeOptions="actionDone"
+                android:inputType="text" />
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/SearchInstructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_spacing_between_content_areas"
+            android:text="@string/search_instructions_2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/vertical_spacing_between_content_areas"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/radio2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/radio2_author"
+                    style="@style/SearchOptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_author" />
+
+                <RadioButton
+                    android:id="@+id/radio2_title"
+                    style="@style/SearchOptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_title" />
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/key2"
+                style="@style/SearchBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/horizontal_spacing"
+                android:layout_marginStart="@dimen/horizontal_spacing"
+                android:layout_weight="1"
+                android:hint="@string/search_hint_string"
+                android:imeOptions="actionDone"
+                android:inputType="text" />
 
         </LinearLayout>
 
@@ -137,21 +137,24 @@
             android:text="@string/order" />
 
         <RadioGroup
+            android:id="@+id/radio3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/vertical_spacing_between_content_areas">
 
             <RadioButton
+                android:id="@+id/radio3_relevance"
+                style="@style/SearchOptions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/relevance"
-                android:textSize="@dimen/search_criteria_font_size" />
+                android:text="@string/relevance" />
 
             <RadioButton
+                android:id="@+id/radio3_date"
+                style="@style/SearchOptions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/date"
-                android:textSize="@dimen/search_criteria_font_size" />
+                android:text="@string/date" />
 
         </RadioGroup>
 
@@ -169,14 +172,14 @@
                 android:layout_marginLeft="@dimen/button_touch_target_horizontal_padding"
                 android:layout_marginRight="@dimen/button_touch_target_horizontal_padding"
                 android:layout_marginStart="@dimen/button_touch_target_horizontal_padding"
-                android:background="@drawable/button">
+                android:background="@drawable/button"
+                android:padding="@dimen/search_button_padding">
 
                 <ImageView
                     android:id="@+id/search_icon"
                     android:layout_width="@dimen/icon_height"
                     android:layout_height="@dimen/icon_height"
                     android:layout_centerVertical="true"
-                    android:layout_margin="@dimen/search_button_icon_padding"
                     android:contentDescription="@string/icon_content_descr"
                     android:src="@drawable/ic_search_24dp" />
 
@@ -185,10 +188,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+
                     android:layout_toEndOf="@id/search_icon"
                     android:layout_toRightOf="@id/search_icon"
-                    android:paddingEnd="@dimen/search_button_text_padding"
-                    android:paddingRight="@dimen/search_button_text_padding"
                     android:text="@string/search" />
 
             </RelativeLayout>

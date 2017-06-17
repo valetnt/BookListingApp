@@ -57,10 +57,10 @@
                 android:layout_marginRight="@dimen/button_touch_target_horizontal_padding"
                 android:layout_marginStart="@dimen/button_touch_target_horizontal_padding"
                 android:gravity="center"
-                android:paddingEnd="@dimen/search_button_text_padding"
-                android:paddingLeft="@dimen/search_button_text_padding"
-                android:paddingRight="@dimen/search_button_text_padding"
-                android:paddingStart="@dimen/search_button_text_padding"
+                android:paddingEnd="@dimen/search_button_padding"
+                android:paddingLeft="@dimen/search_button_padding"
+                android:paddingRight="@dimen/search_button_padding"
+                android:paddingStart="@dimen/search_button_padding"
                 android:text="@string/new_search" />
 
         </FrameLayout>

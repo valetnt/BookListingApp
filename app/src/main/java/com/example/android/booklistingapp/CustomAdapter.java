@@ -1,12 +1,8 @@
 package com.example.android.booklistingapp;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,16 +46,7 @@ public class CustomAdapter extends ArrayAdapter<Book> {
         Book currentItem = getItem(position);
 
         // Display author(s)
-        if (currentItem.getAuthor().endsWith("et al.")) {
-            SpannableString spannable =
-                    new SpannableString(currentItem.getAuthor());
-            StyleSpan styleSpan = new StyleSpan(Typeface.ITALIC);
-            spannable.setSpan(styleSpan, spannable.length() - 6, spannable.length(),
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            author.setText(spannable);
-        } else {
-            author.setText(currentItem.getAuthor());
-        }
+        author.setText(currentItem.getAuthor());
 
         // Display title
         title.setText(currentItem.getTitle());

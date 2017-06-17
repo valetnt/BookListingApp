@@ -17,10 +17,8 @@
     <dimen name="search_instructions_font_size">16sp</dimen>
     <dimen name="search_button_font_size">16sp</dimen>
     <dimen name="search_button_corner_radius">4dp</dimen>
-    <dimen name="search_button_icon_padding">4dp</dimen>
-    <dimen name="search_button_text_padding">8dp</dimen>
-    <dimen name="search_criteria_font_size">14sp</dimen>
-    <dimen name="search_criteria_additional_padding">4dp</dimen>
+    <dimen name="search_button_padding">4dp</dimen>
+    <dimen name="search_options_font_size">14sp</dimen>
 
     <!-- activity_search_results.xml -->
     <dimen name="button_top_margin">32dp</dimen>
