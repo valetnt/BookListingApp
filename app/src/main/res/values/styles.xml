@@ -9,7 +9,7 @@
     </style>
 
     <style name="SearchBar" parent="AppTheme">
-        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColor">@color/colorTextDarker</item>
         <item name="android:textSize">@dimen/search_bar_font_size</item>
     </style>
 
@@ -45,8 +45,8 @@
     </style>
 
     <style name="EmptyListSearchHint" parent="AppTheme">
-        <item name="android:textColor">@color/colorText</item>
         <item name="android:textSize">@dimen/emptylist_new_search_hint_font_size</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <style name="ListItemContents" parent="AppTheme">

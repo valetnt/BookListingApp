@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_touch_target_height"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/button_top_margin">
+            android:layout_marginTop="@dimen/button_big_margin">
 
             <TextView
                 style="@style/SearchButton"

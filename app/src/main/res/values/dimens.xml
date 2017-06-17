@@ -16,14 +16,14 @@
     <dimen name="frame_padding">4dp</dimen>
     <dimen name="search_bar_font_size">14sp</dimen>
     <dimen name="search_instructions_font_size">16sp</dimen>
-    <dimen name="search_tip_font_size">13sp</dimen>
-    <dimen name="search_options_font_size">15sp</dimen>
+    <dimen name="search_tip_font_size">14sp</dimen>
+    <dimen name="search_options_font_size">14sp</dimen>
     <dimen name="search_button_font_size">16sp</dimen>
     <dimen name="search_button_corner_radius">4dp</dimen>
     <dimen name="search_button_padding">4dp</dimen>
 
     <!-- activity_search_results.xml -->
-    <dimen name="button_top_margin">32dp</dimen>
+    <dimen name="button_big_margin">32dp</dimen>
     <dimen name="emptylist_image_size">96dp</dimen>
     <dimen name="emptylist_message_font_size">16sp</dimen>
     <dimen name="emptylist_new_search_hint_font_size">14sp</dimen>

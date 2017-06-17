@@ -3,15 +3,15 @@
     <string name="img_content_descr">book cover</string>
     <string name="img_book_content_descr">book icon, made by Freepik from www.flaticon.com </string>
     <string name="icon_content_descr">search icon</string>
-    <string name="search_instructions_1">Search by keyword(s):</string>
-    <string name="search_instructions_2">Search items containing string:</string>
+    <string name="search_instructions_1">Search by keyword:</string>
+    <string name="search_instructions_2">Search for a specific string:</string>
     <string name="search_hint_keyword"> &#8212; Type keyword(s) here &#8212; </string>
-    <string name="search_tip_keyword">One or more keywords separated by spaces</string>
+    <string name="search_tip_keyword">Enter one or more keywords separated by spaces</string>
     <string name="search_hint_string"> &#8212; Type string here &#8212; </string>
-    <string name="search_tip_string">Enclose between quotes for an exact match</string>
+    <string name="search_tip_string">Enclose string between quotes for exact matching</string>
     <string name="order">Order results by:</string>
     <string name="relevance">Relevance</string>
-    <string name="date">Date of publishing (newest first)</string>
+    <string name="date">Date of publishing (newer first)</string>
     <string name="radio_author">in Author</string>
     <string name="radio_title">in Title</string>
     <string name="search">search</string>
@@ -22,8 +22,8 @@
     <string name="no_internet_connection">You are offline.</string>
     <string name="no_results_found">No results match your query.</string>
     <string name="no_internet_connection_hint">Please check your network connection.</string>
-    <string name="no_results_found_hint">Please adjust your query (e.g. check the spelling,
-        remove quotation marks or use less keywords)</string>
+    <string name="no_results_found_hint">You may want to adjust your query (e.g. check the spelling),
+        or make your query less restricting (e.g. remove quotation marks or use less keywords)</string>
     <string name="new_search">New search</string>
     <string name="no_img_available">No image available</string>
 </resources>
