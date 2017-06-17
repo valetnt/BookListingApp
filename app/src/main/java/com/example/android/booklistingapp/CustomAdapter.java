@@ -31,7 +31,7 @@ public class CustomAdapter extends ArrayAdapter<Book> {
         // If the view already exists, recycle it
         View rootView = convertView;
         if (rootView == null) {
-            // Inflate the item view from list_item.xml
+            // Else, inflate the item view from list_item.xml
             rootView = LayoutInflater.from(mContext).inflate(R.layout.list_item, parent, false);
         }
 
@@ -60,11 +60,12 @@ public class CustomAdapter extends ArrayAdapter<Book> {
         }
 
         // Display rating, if available
-        if (currentItem.getNum_Ratings() > 0) {
-            num_ratings.setText("(" + currentItem.getNum_Ratings() + ")");
+        if (currentItem.getNumRatings() > 0) {
+            num_ratings.setText("(" + currentItem.getNumRatings() + ")");
             ratingBar.setRating((float) currentItem.getRating());
         } else {
             num_ratings.setText("");
+            // If rating is not available, set the rating bar as empty
             ratingBar.setRating(0);
         }
 
@@ -73,6 +74,8 @@ public class CustomAdapter extends ArrayAdapter<Book> {
             image.setImageBitmap(currentItem.getThumbnail());
             no_image.setVisibility(View.GONE);
         } else {
+            // If there is no thumbnail, set a default image
+            // with a string that says "NO IMAGE AVAILABLE"
             image.setImageResource(R.drawable.book);
             no_image.setVisibility(View.VISIBLE);
         }

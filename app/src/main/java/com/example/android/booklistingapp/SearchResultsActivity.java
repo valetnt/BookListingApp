@@ -45,9 +45,9 @@ public class SearchResultsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
 
-        // Receive the intent from MainActivity with the associated query String
+        // Receive the intent from MainActivity with the associated query string
         mQuery = getIntent().getStringExtra(QUERY);
-        // Attach start and end pieces
+        // Attach start and end pieces to the query string
         mQuery = QUERY_START + mQuery + QUERY_END;
 
         Log.i(LOG_TAG, mQuery);
@@ -70,14 +70,14 @@ public class SearchResultsActivity extends AppCompatActivity
             }
         });
 
-        // Create a new adapter that takes an empty list of books as input
+        /**
+         * Create a new adapter that takes an empty list of {@link Book} objects as input
+         */
         mAdapter = new CustomAdapter(this, new ArrayList<Book>());
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
+        // Set the adapter on the ListView so the list can be populated in the user interface
         mListView.setAdapter(mAdapter);
-
         // Set an item click listener on the ListView, which sends an intent to a web browser
-        // to visualize the page of the selected book on books.google.com
+        // to visualize the selected book related page on books.google.com
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -114,17 +114,19 @@ public class SearchResultsActivity extends AppCompatActivity
         boolean isConnected = (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
 
         if (isConnected) {
-            // If the device is connected to the network, we can perform an http request.
-            // Get a LoaderManager to handle an AsyncTask on a background thread, in order to manage
-            // the http request and properly receive the results to our API query.
+            /*
+             * If the device is connected to the network, we can perform an http request.
+             * Get a LoaderManager in order to be able to create and manage loaders.
+             * First argument of method initLoader is arbitrary
+             * (we don't care since we only use one loader).
+             */
             LoaderManager loaderManager = getSupportLoaderManager();
-            // Create new loader or resume already existing one
-            // First argument of initLoader() can be an arbitrary index (we only use one loader)
             loaderManager.initLoader(0, null, this);
 
         } else {
-            // If we are offline and a loader already exists, then intercept it before it starts
-            // loading data and kill it. Thus the message displayed will be "you are offline",
+            // If the device is offline and a loader already exists,
+            // then intercept it before it starts loading data and kill it.
+            // Thus the message displayed will be "you are offline",
             // rather than "no results found".
             if (getSupportLoaderManager().getLoader(0) != null) {
                 getSupportLoaderManager().destroyLoader(0);
@@ -137,12 +139,14 @@ public class SearchResultsActivity extends AppCompatActivity
         }
     }
 
-    /*
-     * Implementation of the LoaderCallbacks interface:
+    /**
+     * Implementation of the {@link LoaderManager.LoaderCallbacks} interface:
      */
     @Override
     public Loader<List<Book>> onCreateLoader(int id, Bundle args) {
-        // Return a new instance of the loader BookListLoader
+        /**
+         * Return a new instance of {@link BookListLoader}
+         */
         return new BookListLoader(this, mQuery);
     }
 

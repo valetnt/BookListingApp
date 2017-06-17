@@ -23,6 +23,13 @@ import java.util.List;
 
 /**
  * Helper methods related to requesting and receiving book data from GoogleBooks API.
+ *
+ * WARNING!!!
+ * This method will only return volumes that have:
+ * 1) A publisher
+ * 2) At least one Industry Identifier, such as an ISBN code
+ * 3) Explicit language specification set to English
+ *
  */
 public class QueryUtils {
 
@@ -55,10 +62,9 @@ public class QueryUtils {
             Log.e(LOG_TAG, "Problem making the HTTP request", e);
         }
 
-        // Extract relevant fields from the JSON response and create a list of books
-        List<Book> books = extractFeatureFromJSON(JSONResponse);
-
-        // Return the list of books
+        // Parse the JSON response and extract a list of books
+        List<Book> books = extractFeaturesFromJSON(JSONResponse);
+        // Return the list
         return books;
     }
 
@@ -139,7 +145,7 @@ public class QueryUtils {
      * Return a list of {@link Book} objects that has been built up from
      * parsing the given JSON response.
      */
-    private static List<Book> extractFeatureFromJSON(String JSONResponse) {
+    private static List<Book> extractFeaturesFromJSON(String JSONResponse) {
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(JSONResponse)) {
             return null;
@@ -152,13 +158,13 @@ public class QueryUtils {
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
-            // Parse the JSON response and fill the ArrayList
+            // Create a JSONObject containing the whole JSONResponse (the root)
+            // Parse the JSONObject starting from the root
             JSONObject JSONString = new JSONObject(JSONResponse);
-
             JSONArray items = JSONString.getJSONArray("items");
+            // Fill the ArrayList with items
             for (int i = 0; i < items.length(); i++) {
                 JSONObject volume = items.getJSONObject(i);
-
                 JSONObject volumeInfo = volume.getJSONObject("volumeInfo");
                 // Get title
                 String title = volumeInfo.getString("title");
@@ -198,54 +204,64 @@ public class QueryUtils {
                         publishingDate = volumeInfo.getString("publishedDate");
                         publishingDate = publishingDate.substring(0, 4); // Only the year
                     }
-                    // Get link to book on books.google.com
-                    // DISCARD BOOKS WITHOUT ISBN CODE
+                    // Get link to book related page on books.google.com
+                    // DISCARD BOOKS WITHOUT INDUSTRY IDENTIFIERS
                     String link = "https://books.google.com/books?vid=ISBN";
                     if (volumeInfo.has("industryIdentifiers")) {
                         JSONArray isbn = volumeInfo.getJSONArray("industryIdentifiers");
-                        int j = 0;
-                        while (j < isbn.length()) {
-                            if (isbn.getJSONObject(j).getString("type").equals("ISBN_10")) {
-                                link = link + isbn.getJSONObject(j).getString("identifier");
-                                break;
+                        if (isbn.length() > 0) {
+                            int j = 0;
+                            while (j < isbn.length()) {
+                                if (isbn.getJSONObject(j).getString("type").equals("ISBN_10")) {
+                                    link = link + isbn.getJSONObject(j).getString("identifier");
+                                    break;
+                                }
+                                j++;
                             }
-                            j++;
-                        }
-                        // Check language restrictions (though already specified in the query):
-                        if (volumeInfo.has("language")) {
-                            if (volumeInfo.getString("language").equals("en")) {
-                                Book book = new Book(title, author, publisher, publishingDate, link);
-                                // Add rating, if present
-                                if (volumeInfo.has("averageRating") && volumeInfo.has("ratingsCount")) {
-                                    double rating = volumeInfo.getDouble("averageRating");
-                                    int num_ratings = volumeInfo.getInt("ratingsCount");
-                                    if (num_ratings > 0) {
-                                        book.setRating(rating, num_ratings);
-                                    }
-                                }
-                                // Add thumbnail, if present. We need to make another HTTP request
-                                // to download the image.
-                                if (volumeInfo.has("imageLinks")) {
-                                    JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
-                                    if (imageLinks.has("smallThumbnail")) {
-                                        String thumbUrl = imageLinks.getString("smallThumbnail");
-                                        Bitmap thumbnail = null;
-                                        // Turn the String into a valid URL
-                                        URL url = createUrl(thumbUrl);
-                                        // Download image from the specified URL
-                                        try {
-                                            thumbnail = downloadBitmap(url);
-                                        } catch (IOException e) {
-                                            Log.e(LOG_TAG, "Could not download the image", e);
-                                        }
-                                        // If download was successful, assign image as book cover thumbnail
-                                        if (thumbnail != null) {
-                                            book.setThumbnail(thumbnail);
+                            // EXPLICITLY CHECK language restrictions (though
+                            // already specified in the query parameters):
+                            if (volumeInfo.has("language")) {
+                                if (volumeInfo.getString("language").equals("en")) {
+
+                                    // If all selection criteria are met, then create
+                                    // a new instance of Book class
+                                    Book book = new Book(title, author, publisher, publishingDate,
+                                            link);
+                                    // Add rating, if present
+                                    if (volumeInfo.has("averageRating") &&
+                                            volumeInfo.has("ratingsCount")) {
+                                        double rating = volumeInfo.getDouble("averageRating");
+                                        int num_ratings = volumeInfo.getInt("ratingsCount");
+                                        if (num_ratings > 0) {
+                                            book.setRating(rating, num_ratings);
                                         }
                                     }
+                                    // Add thumbnail, if present. We need to make
+                                    // another HTTP request to download the image.
+                                    if (volumeInfo.has("imageLinks")) {
+                                        JSONObject imageLinks =
+                                                volumeInfo.getJSONObject("imageLinks");
+                                        if (imageLinks.has("smallThumbnail")) {
+                                            String thumbUrl = imageLinks.getString("smallThumbnail");
+                                            Bitmap thumbnail = null;
+                                            // Turn the String into a valid URL
+                                            URL url = createUrl(thumbUrl);
+                                            // Download image from the specified URL
+                                            try {
+                                                thumbnail = downloadBitmap(url);
+                                            } catch (IOException e) {
+                                                Log.e(LOG_TAG, "Could not download the image", e);
+                                            }
+                                            // If download was successful, assign image as
+                                            // book cover thumbnail
+                                            if (thumbnail != null) {
+                                                book.setThumbnail(thumbnail);
+                                            }
+                                        }
+                                    }
+                                    // Add this volume to the list
+                                    booklist.add(book);
                                 }
-                                // Add this volume to the list
-                                booklist.add(book);
                             }
                         }
                     }

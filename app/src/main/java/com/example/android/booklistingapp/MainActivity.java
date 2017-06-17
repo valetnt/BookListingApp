@@ -13,26 +13,33 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     public static final String QUERY = "query to be searched";
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+
     private String mQuery = "";
     private EditText mEditText0;
     private EditText mEditText1;
     private EditText mEditText2;
-    private String mKey0 = "";
-    private String mKey1 = "";
-    private String mKey2 = "";
-    private String mKeyword1Option;
-    private String mKeyword2Option;
+    private String mField0 = "";
+    private String mField1 = "";
+    private String mField2 = "";
+    private String mOption1;
+    private String mOption2;
     private String mOrderBy;
 
-    // Static method that turns a string like "hello world" into "hello+world"
+    // Static method that turns a string containing spaces like "__hello_world_" into "hello+world"
     private static String concatenateText(String text) {
         if (text.contains(" ")) {
-            String[] splitted = text.split(" ", 0);
-            String concatenated = splitted[0];
-            for (int i = 1; i < splitted.length; i++) {
-                if (!splitted[i].isEmpty()) {
-                    concatenated += ("+" + splitted[i]);
+            // Trim empty spaces at the beginning of the String, so that
+            // when the string is split we are sure that the first element of the array
+            // is NOT an empty String
+            String trimmed = text.trim();
+            String[] split = trimmed.split(" ", 0);
+            // Concatenate text recursively
+            String concatenated = split[0];
+            if (split.length > 1) {
+                for (int i = 1; i < split.length; i++) {
+                    if (!split[i].isEmpty()) {
+                        concatenated += ("+" + split[i]);
+                    }
                 }
             }
             // Replace text with concatenated text
@@ -57,17 +64,17 @@ public class MainActivity extends AppCompatActivity {
         radio2.check(R.id.radio2_author);
         radio3.check(R.id.radio3_relevance);
         // Initialize search options accordingly
-        mKeyword1Option = "inauthor:";
-        mKeyword2Option = "inauthor:";
+        mOption1 = "inauthor:";
+        mOption2 = "inauthor:";
         mOrderBy = "&orderBy=relevance";
 
         radio1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (checkedId == R.id.radio1_author) {
-                    mKeyword1Option = "inauthor:";
+                    mOption1 = "inauthor:";
                 } else if (checkedId == R.id.radio1_title) {
-                    mKeyword1Option = "intitle:";
+                    mOption1 = "intitle:";
                 }
             }
         });
@@ -76,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (checkedId == R.id.radio2_author) {
-                    mKeyword2Option = "inauthor:";
+                    mOption2 = "inauthor:";
                 } else if (checkedId == R.id.radio2_title) {
-                    mKeyword2Option = "intitle:";
+                    mOption2 = "intitle:";
                 }
             }
         });
@@ -105,30 +112,30 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(v.getContext(), "Fill at least one of the fields",
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    // Finalize query string, register all the changes that have taken place
+                    // Finalize query string, register all the changes that have taken place.
                     // Then perform the search by sending an Intent to SearchResultsActivity.
                     // First field
-                    mKey0 = concatenateText(mEditText0.getText().toString());
-                    mQuery = mKey0;
+                    mField0 = concatenateText(mEditText0.getText().toString());
+                    mQuery = mField0;
                     // Second field
                     if (!(mEditText1.getText().toString().isEmpty())) {
-                        mKey1 = concatenateText(mEditText1.getText().toString());
+                        mField1 = concatenateText(mEditText1.getText().toString());
                         if (!mQuery.isEmpty()) {
-                            mQuery = mQuery + "+" + mKeyword1Option + mKey1;
+                            mQuery = mQuery + "+" + mOption1 + mField1;
                         } else {
-                            mQuery = mKeyword1Option + mKey1;
+                            mQuery = mOption1 + mField1;
                         }
                     }
                     // Third field
                     if (!(mEditText2.getText().toString().isEmpty())) {
-                        mKey2 = concatenateText(mEditText2.getText().toString());
+                        mField2 = concatenateText(mEditText2.getText().toString());
                         if (!mQuery.isEmpty()) {
-                            mQuery = mQuery + "+" + mKeyword2Option + mKey2;
+                            mQuery = mQuery + "+" + mOption2 + mField2;
                         } else {
-                            mQuery = mKeyword2Option + mKey2;
+                            mQuery = mOption2 + mField2;
                         }
                     }
-                    // Include ordering preference
+                    // Include sorting preference
                     mQuery = mQuery + mOrderBy;
                     // Send an intent to SearchResultsActivity to perform a search
                     // with the search query attached to the intent as extra
