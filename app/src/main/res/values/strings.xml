@@ -26,5 +26,5 @@
     <string name="order">Order results by:</string>
     <string name="relevance">Relevance</string>
     <string name="date">Date of publishing (newer first)</string>
-    <string name="spinner_prompt">Select Field</string>
+    <string name="spinner_prompt">Select Field &#8212;</string>
 </resources>

@@ -3,6 +3,7 @@ package com.example.android.booklistingapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,22 +12,8 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
-
-/*
- *
- *
- *
- *
- *
- * TODO: FIX PERSISTENCE OF SPINNERS ON DEVICE ROTATION!!!!!!!!!!!!!!!!!!!!!!!!
- *
- *
- *
- *
- *
- *
- */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private String mField0 = "";
     private String mField1 = "";
     private String mField2 = "";
-    private Spinner mSpinner1;
-    private Spinner mSpinner2;
     private String mOption1;
     private String mOption2;
     private String mOrderBy;
@@ -81,41 +66,53 @@ public class MainActivity extends AppCompatActivity {
         mEditText1.setFocusable(false);
         mEditText2.setEnabled(false);
         mEditText2.setFocusable(false);
-        // Initially set spinners as invisible
-        mSpinner1 = (Spinner) findViewById(R.id.spinner1);
-        mSpinner2 = (Spinner) findViewById(R.id.spinner2);
-        mSpinner1.setVisibility(View.GONE);
-        mSpinner2.setVisibility(View.GONE);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.spinner_options, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinners
-        mSpinner1.setAdapter(adapter);
-        mSpinner2.setAdapter(adapter);
 
-        mSpinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        // First, create a SpinnerAdapter from layout resource file spinner.xml
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_options, R.layout.spinner);
+        // Set the layout for the items in the dropdown menu
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_menu_item);
+        /**
+         * Then customize adapter using {@link CustomSpinnerAdapter}, which inflates
+         * a custom "nothing-selected" layout, i.e. the view displayed for spinner
+         * when nothing is selected
+         */
+        SpinnerAdapter customAdapter = new CustomSpinnerAdapter(adapter,
+                R.layout.spinner_nothing_selected, this);
+        // Set customized adapter to the spinners
+        spinner1.setAdapter(customAdapter);
+        spinner2.setAdapter(customAdapter);
+
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Enable editable TextView
-                mEditText1.setEnabled(true);
-                mEditText1.setFocusableInTouchMode(true);
+                if (position > 0) {
+                    /** position = 0 corresponds to the "nothing-selected" view,
+                     * see {@link CustomSpinnerAdapter}
+                     */
+                    // Enable editable TextView
+                    mEditText1.setEnabled(true);
+                    mEditText1.setFocusableInTouchMode(true);
+                    mEditText1.setHintTextColor(ContextCompat.getColor(parent.getContext(),
+                            R.color.colorTextHint));
+                }
                 // Update mOption1
                 switch (position) {
-                    case 0:
+                    case 1:
                         // If TITLE has been selected
                         mOption1 = "intitle:";
                         break;
-                    case 1:
+                    case 2:
                         // If AUTHOR has been selected
                         mOption1 = "inauthor:";
                         break;
-                    case 2:
+                    case 3:
                         // If PUBLISHER has been selected
                         mOption1 = "inpublisher:";
                         break;
-                    case 3:
+                    case 4:
                         // If SUBJECT has been selected
                         mOption1 = "insubject:";
                         break;
@@ -127,27 +124,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mSpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Enable editable TextView
-                mEditText2.setEnabled(true);
-                mEditText2.setFocusableInTouchMode(true);
+                if (position > 0) {
+                    /** position = 0 corresponds to the "nothing-selected" view,
+                     * see {@link CustomSpinnerAdapter}
+                     */
+                    // Enable editable TextView
+                    mEditText2.setEnabled(true);
+                    mEditText2.setFocusableInTouchMode(true);
+                    mEditText2.setHintTextColor(ContextCompat.getColor(parent.getContext(),
+                            R.color.colorTextHint));
+                }
                 // Update mOption2
                 switch (position) {
-                    case 0:
+                    case 1:
                         // If TITLE has been selected
                         mOption2 = "intitle:";
                         break;
-                    case 1:
+                    case 2:
                         // If AUTHOR has been selected
                         mOption2 = "inauthor:";
                         break;
-                    case 2:
+                    case 3:
                         // If PUBLISHER has been selected
                         mOption2 = "inpublisher:";
                         break;
-                    case 3:
+                    case 4:
                         // If SUBJECT has been selected
                         mOption2 = "insubject:";
                         break;
@@ -158,26 +162,6 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-        // Display the spinner prompt views
-        View prompt1 = findViewById(R.id.prompt1);
-        View prompt2 = findViewById(R.id.prompt2);
-        // As soon as the user clicks on the prompt, hide the prompt and show the spinner
-        prompt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setVisibility(View.GONE);
-                mSpinner1.setVisibility(View.VISIBLE);
-            }
-        });
-        prompt2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setVisibility(View.GONE);
-                mSpinner2.setVisibility(View.VISIBLE);
-            }
-        });
-
 
         RadioGroup radio = (RadioGroup) findViewById(R.id.radio_group);
         // Initialize state of the radio group

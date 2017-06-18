@@ -66,44 +66,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="@dimen/spinner_width"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical">
-
-                    <LinearLayout
-                        android:id="@+id/prompt1"
-                        android:layout_width="@dimen/spinner_width"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/white"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/frame_padding"
-                            android:layout_marginStart="@dimen/frame_padding"
-                            android:layout_weight="1"
-                            android:paddingBottom="@dimen/frame_padding"
-                            android:paddingTop="@dimen/frame_padding"
-                            android:text="@string/spinner_prompt" />
-
-                        <ImageView
-                            android:layout_width="@dimen/icon_height"
-                            android:layout_height="@dimen/icon_height"
-                            android:src="@drawable/ic_arrow_drop_down_24dp" />
-
-                    </LinearLayout>
-
-                    <Spinner
-                        android:id="@+id/spinner1"
-                        android:layout_width="@dimen/spinner_width"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/white"
-                        android:spinnerMode="dropdown" />
-
-                </RelativeLayout>
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/white"
+                    android:spinnerMode="dropdown" />
 
                 <EditText
                     android:id="@+id/key1"
@@ -114,9 +83,11 @@
                     android:layout_marginLeft="@dimen/horizontal_spacing"
                     android:layout_marginStart="@dimen/horizontal_spacing"
                     android:layout_weight="1"
+                    android:enabled="false"
                     android:hint="@string/search_hint_string"
                     android:imeOptions="actionDone"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textColorHint="@color/colorTextHintDisabled" />
 
             </LinearLayout>
 
@@ -147,44 +118,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="@dimen/spinner_width"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical">
-
-                    <LinearLayout
-                        android:id="@+id/prompt2"
-                        android:layout_width="@dimen/spinner_width"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/white"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/frame_padding"
-                            android:layout_marginStart="@dimen/frame_padding"
-                            android:layout_weight="1"
-                            android:paddingBottom="@dimen/frame_padding"
-                            android:paddingTop="@dimen/frame_padding"
-                            android:text="@string/spinner_prompt" />
-
-                        <ImageView
-                            android:layout_width="@dimen/icon_height"
-                            android:layout_height="@dimen/icon_height"
-                            android:src="@drawable/ic_arrow_drop_down_24dp" />
-
-                    </LinearLayout>
-
-                    <Spinner
-                        android:id="@+id/spinner2"
-                        android:layout_width="@dimen/spinner_width"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/white"
-                        android:spinnerMode="dropdown" />
-
-                </RelativeLayout>
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/white"
+                    android:spinnerMode="dropdown" />
 
                 <EditText
                     android:id="@+id/key2"
@@ -195,9 +135,11 @@
                     android:layout_marginLeft="@dimen/horizontal_spacing"
                     android:layout_marginStart="@dimen/horizontal_spacing"
                     android:layout_weight="1"
+                    android:enabled="false"
                     android:hint="@string/search_hint_string"
                     android:imeOptions="actionDone"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textColorHint="@color/colorTextHintDisabled" />
 
             </LinearLayout>
 
