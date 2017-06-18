@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_options">
+        <item>in Title:</item>
+        <item>in Author:</item>
+        <item>in Publisher:</item>
+        <item>in Subject:</item>
+    </string-array>
+</resources>

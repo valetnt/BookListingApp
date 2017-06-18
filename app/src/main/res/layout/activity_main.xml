@@ -66,26 +66,44 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <RadioGroup
-                    android:id="@+id/radio1"
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical">
 
-                    <RadioButton
-                        android:id="@+id/radio1_author"
-                        style="@style/SearchOptions"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:id="@+id/prompt1"
+                        android:layout_width="@dimen/spinner_width"
                         android:layout_height="wrap_content"
-                        android:text="@string/radio_author" />
+                        android:background="@android:color/white"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/radio1_title"
-                        style="@style/SearchOptions"
-                        android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/frame_padding"
+                            android:layout_marginStart="@dimen/frame_padding"
+                            android:layout_weight="1"
+                            android:paddingBottom="@dimen/frame_padding"
+                            android:paddingTop="@dimen/frame_padding"
+                            android:text="@string/spinner_prompt" />
+
+                        <ImageView
+                            android:layout_width="@dimen/icon_height"
+                            android:layout_height="@dimen/icon_height"
+                            android:src="@drawable/ic_arrow_drop_down_24dp" />
+
+                    </LinearLayout>
+
+                    <Spinner
+                        android:id="@+id/spinner1"
+                        android:layout_width="@dimen/spinner_width"
                         android:layout_height="wrap_content"
-                        android:text="@string/radio_title" />
+                        android:background="@android:color/white"
+                        android:spinnerMode="dropdown" />
 
-                </RadioGroup>
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/key1"
@@ -129,26 +147,44 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <RadioGroup
-                    android:id="@+id/radio2"
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical">
 
-                    <RadioButton
-                        android:id="@+id/radio2_author"
-                        style="@style/SearchOptions"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:id="@+id/prompt2"
+                        android:layout_width="@dimen/spinner_width"
                         android:layout_height="wrap_content"
-                        android:text="@string/radio_author" />
+                        android:background="@android:color/white"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/radio2_title"
-                        style="@style/SearchOptions"
-                        android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/frame_padding"
+                            android:layout_marginStart="@dimen/frame_padding"
+                            android:layout_weight="1"
+                            android:paddingBottom="@dimen/frame_padding"
+                            android:paddingTop="@dimen/frame_padding"
+                            android:text="@string/spinner_prompt" />
+
+                        <ImageView
+                            android:layout_width="@dimen/icon_height"
+                            android:layout_height="@dimen/icon_height"
+                            android:src="@drawable/ic_arrow_drop_down_24dp" />
+
+                    </LinearLayout>
+
+                    <Spinner
+                        android:id="@+id/spinner2"
+                        android:layout_width="@dimen/spinner_width"
                         android:layout_height="wrap_content"
-                        android:text="@string/radio_title" />
+                        android:background="@android:color/white"
+                        android:spinnerMode="dropdown" />
 
-                </RadioGroup>
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/key2"
@@ -188,19 +224,19 @@
                 android:text="@string/order" />
 
             <RadioGroup
-                android:id="@+id/radio3"
+                android:id="@+id/radio_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <RadioButton
-                    android:id="@+id/radio3_relevance"
+                    android:id="@+id/radio_relevance"
                     style="@style/SearchOptions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/relevance" />
 
                 <RadioButton
-                    android:id="@+id/radio3_date"
+                    android:id="@+id/radio_date"
                     style="@style/SearchOptions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
