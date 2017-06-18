@@ -22,6 +22,7 @@
     <dimen name="search_button_corner_radius">4dp</dimen>
     <dimen name="search_button_padding">4dp</dimen>
     <dimen name="spinner_width">120dp</dimen>
+    <dimen name="spinner_height">30dp</dimen>
 
     <!-- activity_search_results.xml -->
     <dimen name="button_big_margin">32dp</dimen>

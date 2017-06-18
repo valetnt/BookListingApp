@@ -66,13 +66,28 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Spinner
-                    android:id="@+id/spinner1"
+                <RelativeLayout
                     android:layout_width="@dimen/spinner_width"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@android:color/white"
-                    android:spinnerMode="dropdown" />
+                    android:layout_height="@dimen/spinner_height"
+                    android:layout_gravity="center_vertical">
+
+                    <Spinner
+                        android:id="@+id/spinner1"
+                        android:layout_width="@dimen/spinner_width"
+                        android:layout_height="@dimen/spinner_height"
+                        android:background="@android:color/white"
+                        android:spinnerMode="dropdown" />
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_height"
+                        android:layout_height="@dimen/icon_height"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/white"
+                        android:src="@drawable/ic_arrow_drop_down_24dp" />
+
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/key1"
@@ -118,13 +133,28 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Spinner
-                    android:id="@+id/spinner2"
+                <RelativeLayout
                     android:layout_width="@dimen/spinner_width"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@android:color/white"
-                    android:spinnerMode="dropdown" />
+                    android:layout_height="@dimen/spinner_height"
+                    android:layout_gravity="center_vertical">
+
+                    <Spinner
+                        android:id="@+id/spinner2"
+                        android:layout_width="@dimen/spinner_width"
+                        android:layout_height="@dimen/spinner_height"
+                        android:background="@android:color/white"
+                        android:spinnerMode="dropdown" />
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_height"
+                        android:layout_height="@dimen/icon_height"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/white"
+                        android:src="@drawable/ic_arrow_drop_down_24dp" />
+
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/key2"

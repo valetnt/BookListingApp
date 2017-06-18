@@ -5,9 +5,10 @@
     android:background="@android:color/white"
     android:orientation="horizontal">
 
-    <TextView
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="@dimen/spinner_width"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/spinner_height"
+        android:gravity="center_vertical"
         android:paddingBottom="@dimen/frame_padding"
         android:paddingEnd="@dimen/frame_padding"
         android:paddingLeft="@dimen/frame_padding"
@@ -15,10 +16,5 @@
         android:paddingStart="@dimen/frame_padding"
         android:paddingTop="@dimen/frame_padding"
         android:text="@string/spinner_prompt" />
-
-    <ImageView
-        android:layout_width="@dimen/icon_height"
-        android:layout_height="@dimen/icon_height"
-        android:src="@drawable/ic_arrow_drop_down_24dp" />
 
 </LinearLayout>
